@@ -89,11 +89,53 @@ else
 fi
 echo ""
 
+# CSV出力テスト（5件制限）
+echo "10. export:csv:ai (5件制限)..."
+npx ts-node src/exportCsv.ts --type=ai --limit=5 2>&1 | head -20
+if [ $? -eq 0 ]; then
+    echo "✅ export:csv:ai: OK"
+else
+    echo "❌ export:csv:ai: FAILED"
+fi
+echo ""
+
+echo "11. export:csv:hearts (5件制限)..."
+npx ts-node src/exportCsv.ts --type=ai-hearts --limit=5 2>&1 | head -20
+if [ $? -eq 0 ]; then
+    echo "✅ export:csv:hearts: OK"
+else
+    echo "❌ export:csv:hearts: FAILED"
+fi
+echo ""
+
+echo "12. export:csv:dxg (5件制限)..."
+npx ts-node src/exportCsv.ts --type=dx-g --limit=5 2>&1 | head -20
+if [ $? -eq 0 ]; then
+    echo "✅ export:csv:dxg: OK"
+else
+    echo "❌ export:csv:dxg: FAILED"
+fi
+echo ""
+
+echo "13. dxg:history:csv (5件制限)..."
+npx ts-node src/exportDxgHistory.ts --limit=5 2>&1 | head -20
+if [ $? -eq 0 ]; then
+    echo "✅ dxg:history:csv: OK"
+else
+    echo "❌ dxg:history:csv: FAILED"
+fi
+echo ""
+
+# テスト用CSVファイルを削除
+echo "テスト用CSVファイルをクリーンアップ中..."
+rm -f output/*_limit5_*.csv
+echo ""
+
 echo "========================================="
 echo "テスト完了"
 echo "========================================="
 echo ""
-echo "✅ テスト済みコマンド (9個):"
+echo "✅ テスト済みコマンド (13個):"
 echo "  1. build"
 echo "  2. dev"
 echo "  3. dev:ai"
@@ -103,20 +145,24 @@ echo "  6. dev:hearts-score"
 echo "  7. dev:dxg"
 echo "  8. dev:dxg-score"
 echo "  9. dxg:history"
+echo "  10. export:csv:ai (--limit=5)"
+echo "  11. export:csv:hearts (--limit=5)"
+echo "  12. export:csv:dxg (--limit=5)"
+echo "  13. dxg:history:csv (--limit=5)"
 echo ""
 echo "⏭️  スキップしたコマンド（時間がかかる/要手動テスト）:"
 echo "  - start (要手動テスト: npm start)"
 echo "  - dev:ai-all, dev:ai-all-score"
 echo "  - dev:hearts-all, dev:hearts-all-score"
 echo "  - dev:dxg-all, dev:dxg-all-score"
-echo "  - export:csv:ai, export:csv:hearts, export:csv:dxg"
-echo "  - dxg:history:all, dxg:history:csv"
+echo "  - export:csv:* (全データ版)"
+echo "  - dxg:history:all, dxg:history:csv (全データ版)"
 echo "  - example:basic, example:stats, example:detail, example:detail:*"
 echo "  - test:dxg-endpoints, test:dxg-sp, test:dxg-token"
 echo "  - debug:dxg"
 echo ""
 echo "📝 package.json の全スクリプト数: 31個"
-echo "   - テスト済み: 9個"
-echo "   - スキップ: 22個（長時間実行/デバッグ用/サンプル/要手動テスト）"
+echo "   - テスト済み: 13個"
+echo "   - スキップ: 18個（長時間実行/デバッグ用/サンプル/要手動テスト）"
 echo ""
 echo "💡 スキップしたコマンドは個別に実行してテストしてください。"

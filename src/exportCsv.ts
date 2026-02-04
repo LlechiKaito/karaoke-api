@@ -10,9 +10,11 @@ dotenv.config();
 const args = process.argv.slice(2);
 const typeArg = args.find(arg => arg.startsWith('--type='));
 const outputArg = args.find(arg => arg.startsWith('--output='));
+const limitArg = args.find(arg => arg.startsWith('--limit='));
 
 let scoringType: ScoringType = 'ai';
 let outputPath = './output';
+let limit: number | undefined = undefined;
 
 if (typeArg) {
   const type = typeArg.split('=')[1];
@@ -23,6 +25,13 @@ if (typeArg) {
 
 if (outputArg) {
   outputPath = outputArg.split('=')[1];
+}
+
+if (limitArg) {
+  const limitValue = parseInt(limitArg.split('=')[1]);
+  if (!isNaN(limitValue) && limitValue > 0) {
+    limit = limitValue;
+  }
 }
 
 const TYPE_NAMES: Record<ScoringType, string> = {
@@ -50,7 +59,11 @@ async function exportToCSV() {
   console.log(`=== CSV出力 [${TYPE_NAMES[scoringType]}] ===\n`);
 
   try {
-    console.log('全データを取得中...');
+    if (limit) {
+      console.log(`最新${limit}件のデータを取得中...`);
+    } else {
+      console.log('全データを取得中...');
+    }
     const allData = await client.getAllScoringData(scoringType);
 
     console.log(`取得完了: ${allData.length}件\n`);
@@ -63,8 +76,11 @@ async function exportToCSV() {
     // 点数順（降順）にソート
     const sortedData = allData.sort((a, b) => b.totalScore - a.totalScore);
 
+    // limitが指定されている場合は制限
+    const exportData = limit ? sortedData.slice(0, limit) : sortedData;
+
     // CSV変換
-    const csv = convertToCSV(sortedData);
+    const csv = convertToCSV(exportData);
 
     // 出力ディレクトリを作成
     if (!fs.existsSync(outputPath)) {
@@ -73,7 +89,8 @@ async function exportToCSV() {
 
     // ファイル名を生成（タイムスタンプ付き）
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
-    const filename = `dam_${scoringType}_${timestamp}.csv`;
+    const limitSuffix = limit ? `_limit${limit}` : '';
+    const filename = `dam_${scoringType}${limitSuffix}_${timestamp}.csv`;
     const filepath = path.join(outputPath, filename);
 
     // ファイルに書き込み
@@ -81,12 +98,12 @@ async function exportToCSV() {
 
     console.log(`✅ CSV出力完了`);
     console.log(`ファイル: ${filepath}`);
-    console.log(`データ数: ${allData.length}件`);
+    console.log(`データ数: ${exportData.length}件`);
 
     // 統計情報
-    const avgScore = allData.reduce((sum, s) => sum + s.totalScore, 0) / allData.length;
-    const maxScore = allData.reduce((max, s) => s.totalScore > max.totalScore ? s : max);
-    const minScore = allData.reduce((min, s) => s.totalScore < min.totalScore ? s : min);
+    const avgScore = exportData.reduce((sum, s) => sum + s.totalScore, 0) / exportData.length;
+    const maxScore = exportData.reduce((max, s) => s.totalScore > max.totalScore ? s : max);
+    const minScore = exportData.reduce((min, s) => s.totalScore < min.totalScore ? s : min);
 
     console.log(`\n📊 統計情報:`);
     console.log(`平均点: ${avgScore.toFixed(3)}点`);
