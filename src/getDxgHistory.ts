@@ -5,7 +5,7 @@ dotenv.config();
 
 async function main() {
   // ユーザー名を設定
-  const username = 'LLENN';
+  const username = 'YOUR_USERNAME';
 
   const client = new DxgHistoryClient(username);
 
@@ -71,7 +71,7 @@ const args = process.argv.slice(2);
 if (args.includes('--all')) {
   // 全データ取得
   (async () => {
-    const username = 'LLENN';
+    const username = 'YOUR_USERNAME';
     const client = new DxgHistoryClient(username);
 
     console.log(`=== 精密集計DX-G 全履歴取得 [${username}] ===\n`);

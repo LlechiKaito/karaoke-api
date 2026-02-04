@@ -132,7 +132,7 @@ console.log(`総合点: ${score.totalScore}点`);
 ```typescript
 import { DxgHistoryClient } from './dxgHistoryClient';
 
-const client = new DxgHistoryClient('LLENN');
+const client = new DxgHistoryClient('YOUR_USERNAME');
 
 // 全履歴を取得（200件以上も可能）
 const allHistory = await client.getAllHistory();
