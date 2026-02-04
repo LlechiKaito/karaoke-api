@@ -74,7 +74,13 @@ cp .env.example .env
 `.env` ファイルを編集:
 ```
 CDM_CARD_NO=取得したcdmCardNoをここに貼り付け
+DXG_HISTORY_USERNAME=あなたのユーザー名（精密集計DX-G履歴取得時に必要）
 ```
+
+**ユーザー名の確認方法（精密集計DX-G履歴取得時のみ必要）:**
+1. [DAM★とも マイページ](https://www.clubdam.com/app/damtomo/MyPage.do) にアクセス
+2. ページ上部に表示される「{ユーザー名}さん」の部分を確認
+3. この`{ユーザー名}`を`.env`の`DXG_HISTORY_USERNAME`に設定
 
 ### 4. 実行
 
@@ -200,7 +206,7 @@ topScores.forEach(record => {
 | `npm run dxg:history:all` | 精密集計DX-Gから全履歴取得 |
 | `npm run dxg:history:csv` | 精密集計DX-Gの全履歴をCSV出力 |
 
-**注意**: ユーザー名を変更する場合は `src/getDxgHistory.ts` および `src/exportDxgHistory.ts` の `username` 変数を編集してください。
+**注意**: ユーザー名は`.env`の`DXG_HISTORY_USERNAME`で設定してください。ユーザー名は[マイページ](https://www.clubdam.com/app/damtomo/MyPage.do)の「{ユーザー名}さん」で確認できます。
 
 ### サンプル実行
 
@@ -267,9 +273,9 @@ karaoke-api/
 ### 精密集計DX-Gでデータが取得できない
 
 → 以下を確認してください：
-1. ユーザー名が正しいか（https://dx-g.clubdam.info/user/{ユーザー名} にアクセス可能か）
-2. 精密集計DX-Gに登録済みか
-3. `.env` に `DXG_HISTORY_USERNAME` が設定されているか
+1. `.env`に`DXG_HISTORY_USERNAME`が設定されているか
+2. ユーザー名が正しいか（[マイページ](https://www.clubdam.com/app/damtomo/MyPage.do)で確認）
+3. 精密集計DX-Gに登録済みか（https://dx-g.clubdam.info/user/{ユーザー名} にアクセス可能か）
 
 ### 公式APIで200件しか取得できない
 

@@ -6,7 +6,7 @@ import * as path from 'path';
 dotenv.config();
 
 async function exportToCSV() {
-  const username = 'YOUR_USERNAME';
+  const username = process.env.DXG_HISTORY_USERNAME || 'YOUR_USERNAME';
   const outputPath = './output';
 
   const client = new DxgHistoryClient(username);
