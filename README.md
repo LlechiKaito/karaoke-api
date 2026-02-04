@@ -65,7 +65,20 @@ npm install
 3. ネットワークタブで `CalorieHistoryListXML.do` のレスポンスを確認
 4. レスポンス内の `<cdmCardNo>ここの値</cdmCardNo>` をコピー
 
-### 3. 環境変数の設定
+### 3. CDMトークンの取得（精密採点DX-G使用時のみ必要）
+
+精密採点DX-G（公式API経由）を使用する場合のみ必要です。
+
+**⚠️ 注意:** 精密集計DX-G**履歴取得**（`npm run dxg:history`）を使う場合は不要です。
+
+**取得手順:**
+1. ブラウザで [DAM★とも](https://www.clubdam.com) にログイン
+2. 開発者ツール（F12）を開いてネットワークタブを選択
+3. DX-Gの採点履歴ページにアクセス
+4. ネットワークタブで `GetScoringDxgListXML.do` のリクエストを探す
+5. リクエストの **Query String Parameters** から `cdmToken` の値をコピー
+
+### 4. 環境変数の設定
 
 ```bash
 cp .env.example .env
@@ -73,16 +86,30 @@ cp .env.example .env
 
 `.env` ファイルを編集:
 ```
+# 必須
 CDM_CARD_NO=取得したcdmCardNoをここに貼り付け
-DXG_HISTORY_USERNAME=あなたのユーザー名（精密集計DX-G履歴取得時に必要）
+
+# 精密採点DX-G（公式API）を使う場合のみ必要
+CDM_TOKEN=取得したcdmTokenをここに貼り付け
+
+# 精密集計DX-G履歴取得を使う場合のみ必要
+DXG_HISTORY_USERNAME=あなたのユーザー名
 ```
+
+**各項目の説明:**
+
+| 環境変数 | 必須 | 用途 |
+|---------|------|------|
+| `CDM_CARD_NO` | ✅ 必須 | 全ての機能で必要 |
+| `CDM_TOKEN` | ⚠️ 条件付き | 精密採点DX-G（`dev:dxg`, `export:csv:dxg`）使用時のみ |
+| `DXG_HISTORY_USERNAME` | ⚠️ 条件付き | 精密集計DX-G履歴取得（`dxg:history`）使用時のみ |
 
 **ユーザー名の確認方法（精密集計DX-G履歴取得時のみ必要）:**
 1. [DAM★とも マイページ](https://www.clubdam.com/app/damtomo/MyPage.do) にアクセス
 2. ページ上部に表示される「{ユーザー名}さん」の部分を確認
 3. この`{ユーザー名}`を`.env`の`DXG_HISTORY_USERNAME`に設定
 
-### 4. 実行
+### 5. 実行
 
 ```bash
 npm run dev
@@ -326,7 +353,16 @@ karaoke-api/
 
 → ページをリロードするか、フィルターを「All」に変更してください
 
-### 精密集計DX-Gでデータが取得できない
+### 精密採点DX-G（公式API）でエラーが出る
+
+→ 以下を確認してください：
+1. `.env`に`CDM_TOKEN`が設定されているか
+2. `CDM_TOKEN`が正しいか（GetScoringDxgListXML.do のリクエストから取得）
+3. トークンが期限切れの場合は、再度取得し直してください
+
+**注意:** 精密採点DX-Gの公式API（`npm run dev:dxg`, `npm run export:csv:dxg`）を使う場合は`CDM_TOKEN`が必要です。
+
+### 精密集計DX-G履歴でデータが取得できない
 
 → 以下を確認してください：
 1. `.env`に`DXG_HISTORY_USERNAME`が設定されているか
