@@ -198,6 +198,26 @@ topScores.forEach(record => {
 | `npm run export:csv:hearts` | 精密採点Ai HeartsをCSV出力 |
 | `npm run export:csv:dxg` | 精密採点DX-GをCSV出力 |
 
+**件数を制限したい場合:**
+
+スクリプトに直接`--limit`パラメータを指定できます。
+
+```bash
+# 精密採点Aiの上位5件のみCSV出力
+npx ts-node src/exportCsv.ts --type=ai --limit=5
+
+# 精密採点Heartsの上位10件のみCSV出力
+npx ts-node src/exportCsv.ts --type=ai-hearts --limit=10
+
+# 精密採点DX-Gの上位20件のみCSV出力
+npx ts-node src/exportCsv.ts --type=dx-g --limit=20
+```
+
+**用途:**
+- テスト時に少量データで動作確認したい場合
+- 最新の数件だけをすぐに確認したい場合
+- 高得点の上位データのみを抽出したい場合
+
 ### 精密集計DX-G履歴取得（200件以上対応）
 
 | コマンド | 説明 |
@@ -207,6 +227,16 @@ topScores.forEach(record => {
 | `npm run dxg:history:csv` | 精密集計DX-Gの全履歴をCSV出力 |
 
 **注意**: ユーザー名は`.env`の`DXG_HISTORY_USERNAME`で設定してください。ユーザー名は[マイページ](https://www.clubdam.com/app/damtomo/MyPage.do)の「{ユーザー名}さん」で確認できます。
+
+**件数を制限したい場合:**
+
+```bash
+# 上位5件のみCSV出力
+npx ts-node src/exportDxgHistory.ts --limit=5
+
+# 上位10件のみCSV出力
+npx ts-node src/exportDxgHistory.ts --limit=10
+```
 
 ### サンプル実行
 
