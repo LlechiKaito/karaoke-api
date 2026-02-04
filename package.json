@@ -1,0 +1,59 @@
+{
+  "name": "karaoke-api",
+  "version": "1.0.0",
+  "description": "DAM Karaoke API Client",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "dev:ai": "ts-node src/index.ts --type=ai",
+    "dev:ai-all": "ts-node src/index.ts --type=ai --all",
+    "dev:ai-score": "ts-node src/index.ts --type=ai --sort=score",
+    "dev:ai-all-score": "ts-node src/index.ts --type=ai --all --sort=score",
+    "dev:hearts": "ts-node src/index.ts --type=ai-hearts",
+    "dev:hearts-all": "ts-node src/index.ts --type=ai-hearts --all",
+    "dev:hearts-score": "ts-node src/index.ts --type=ai-hearts --sort=score",
+    "dev:hearts-all-score": "ts-node src/index.ts --type=ai-hearts --all --sort=score",
+    "dev:dxg": "ts-node src/index.ts --type=dx-g",
+    "dev:dxg-all": "ts-node src/index.ts --type=dx-g --all",
+    "dev:dxg-score": "ts-node src/index.ts --type=dx-g --sort=score",
+    "dev:dxg-all-score": "ts-node src/index.ts --type=dx-g --all --sort=score",
+    "export:csv:ai": "ts-node src/exportCsv.ts --type=ai",
+    "export:csv:hearts": "ts-node src/exportCsv.ts --type=ai-hearts",
+    "export:csv:dxg": "ts-node src/exportCsv.ts --type=dx-g",
+    "test:dxg-endpoints": "ts-node scripts/test-dxg-endpoints.ts",
+    "debug:dxg": "ts-node scripts/debug-dxg.ts",
+    "test:dxg-sp": "ts-node scripts/test-dxg-sp.ts",
+    "test:dxg-token": "ts-node scripts/test-dxg-with-token.ts",
+    "example:basic": "ts-node examples/basic-usage.ts",
+    "example:stats": "ts-node examples/statistics.ts",
+    "example:detail": "ts-node examples/detail-data.ts",
+    "example:detail:ai": "ts-node examples/detail-data.ts --type=ai",
+    "example:detail:hearts": "ts-node examples/detail-data.ts --type=ai-hearts",
+    "example:detail:dxg": "ts-node examples/detail-data.ts --type=dx-g",
+    "dxg:history": "ts-node src/getDxgHistory.ts",
+    "dxg:history:all": "ts-node src/getDxgHistory.ts --all",
+    "dxg:history:csv": "ts-node src/exportDxgHistory.ts"
+  },
+  "keywords": [
+    "karaoke",
+    "dam",
+    "api"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@types/cheerio": "^0.22.35",
+    "axios": "^1.6.0",
+    "cheerio": "^1.2.0",
+    "dotenv": "^17.2.3",
+    "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/xml2js": "^0.4.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.0"
+  }
+}
