@@ -19,7 +19,7 @@ new DAMClient(config: DAMClientConfig)
 
 ```typescript
 const client = new DAMClient({
-  cdmCardNo: 'ODAwMDA1MTI4MjU1NDk1'
+  cdmCardNo: 'YOUR_CDM_CARD_NO_HERE'
 });
 ```
 

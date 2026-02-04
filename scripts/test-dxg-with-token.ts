@@ -11,12 +11,15 @@ dotenv.config();
 async function testDxGWithToken() {
   const url = 'https://www.clubdam.com/app/damtomo/scoring/GetScoringDxgListXML.do';
   const cdmCardNo = process.env.CDM_CARD_NO;
-
-  // ユーザーから提供されたcdmToken
-  const cdmToken = '2085e1d612ddcebd35977854afa75eb3fe6e429993d12e5cae385e07ecd66db4';
+  const cdmToken = process.env.CDM_TOKEN;
 
   if (!cdmCardNo) {
     console.error('CDM_CARD_NO が設定されていません');
+    process.exit(1);
+  }
+
+  if (!cdmToken) {
+    console.error('CDM_TOKEN が設定されていません');
     process.exit(1);
   }
 

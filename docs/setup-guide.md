@@ -59,11 +59,11 @@
 2. XMLデータが表示されます
 3. その中から以下のような行を探します:
    ```xml
-   <cdmCardNo>ODAwMDA1MTI4MjU1NDk1</cdmCardNo>
+   <cdmCardNo>YOUR_CDM_CARD_NO_HERE</cdmCardNo>
    ```
 
 4. **`<cdmCardNo>` と `</cdmCardNo>` の間にある文字列**をコピー
-   - 例: `ODAwMDA1MTI4MjU1NDk1`
+   - 例: `YOUR_CDM_CARD_NO_HERE`
 
 ### 補足: 他の方法でも取得可能
 
@@ -99,7 +99,7 @@ cp .env.example .env
 取得した `cdmCardNo` を設定します:
 
 ```
-CDM_CARD_NO=ODAwMDA1MTI4MjU1NDk1
+CDM_CARD_NO=YOUR_CDM_CARD_NO_HERE
 ```
 
 **注意:** 上記は例です。あなた自身の値に置き換えてください。
