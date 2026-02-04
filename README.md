@@ -200,14 +200,7 @@ topScores.forEach(record => {
 | `npm run dxg:history:all` | 精密集計DX-Gから全履歴取得 |
 | `npm run dxg:history:csv` | 精密集計DX-Gの全履歴をCSV出力 |
 
-**注意**: この機能を使用するには `.env` に `DXG_HISTORY_USERNAME` を設定してください。
-
-```bash
-# .env ファイル
-DXG_HISTORY_USERNAME=あなたのユーザー名
-```
-
-ユーザー名は https://dx-g.clubdam.info/user/{ユーザー名} のURLから確認できます。
+**注意**: ユーザー名を変更する場合は `src/getDxgHistory.ts` および `src/exportDxgHistory.ts` の `username` 変数を編集してください。
 
 ### サンプル実行
 

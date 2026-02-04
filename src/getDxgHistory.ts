@@ -4,8 +4,8 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 async function main() {
-  // 環境変数からユーザー名を取得、なければデフォルト
-  const username = process.env.DXG_HISTORY_USERNAME || 'LLENN';
+  // ユーザー名を設定
+  const username = 'LLENN';
 
   const client = new DxgHistoryClient(username);
 
@@ -71,7 +71,7 @@ const args = process.argv.slice(2);
 if (args.includes('--all')) {
   // 全データ取得
   (async () => {
-    const username = process.env.DXG_HISTORY_USERNAME || 'LLENN';
+    const username = 'LLENN';
     const client = new DxgHistoryClient(username);
 
     console.log(`=== 精密集計DX-G 全履歴取得 [${username}] ===\n`);
