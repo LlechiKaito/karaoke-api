@@ -226,7 +226,33 @@ npx ts-node src/exportCsv.ts --type=dx-g --limit=20
 | `npm run dxg:history:all` | 精密集計DX-Gから全履歴取得 |
 | `npm run dxg:history:csv` | 精密集計DX-Gの全履歴をCSV出力 |
 
-**注意**: ユーザー名は`.env`の`DXG_HISTORY_USERNAME`で設定してください。ユーザー名は[マイページ](https://www.clubdam.com/app/damtomo/MyPage.do)の「{ユーザー名}さん」で確認できます。
+#### セットアップ（初回のみ）
+
+精密集計DX-G履歴取得を使用するには、ユーザー名の設定が必要です。
+
+**1. ユーザー名を確認:**
+1. [DAM★とも マイページ](https://www.clubdam.com/app/damtomo/MyPage.do) にアクセス
+2. ページ上部に「**〇〇〇〇さん**」と表示されている部分を確認
+3. 「さん」の前の部分があなたのユーザー名です
+
+**2. 環境変数に設定:**
+
+`.env`ファイルを開いて、以下の行を追加または編集:
+```
+DXG_HISTORY_USERNAME=あなたのユーザー名
+```
+
+例: マイページに「LLENNさん」と表示されている場合
+```
+DXG_HISTORY_USERNAME=LLENN
+```
+
+**3. 動作確認:**
+```bash
+npm run dxg:history
+```
+
+データが取得できれば設定完了です！
 
 **件数を制限したい場合:**
 
